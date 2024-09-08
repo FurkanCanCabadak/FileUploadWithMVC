@@ -1,0 +1,114 @@
+def ana_sayfa(stok):
+    # Ana sayfa döngüsünü kontrol eden bool değişkeni
+    devam_et = True
+
+    # Kullanıcı çıkış yapana kadar döngü devam eder
+    while devam_et:
+        # Ana sayfa seçeneklerini ekrana yazdırıyoruz
+        print("\nAna Sayfaya Hoş Geldiniz!")
+        print("1. Yedek Parça")
+        print("2. Makine Parçası")
+        print("3. Stokları Görüntüle")
+        print("4. Çıkış")
+
+        try:
+            # Kullanıcıdan seçim yapmasını istiyoruz
+            secenek = int(input("Seçiminizi yapın (1, 2, 3 veya 4): "))
+        except ValueError:
+            # Eğer kullanıcı geçersiz bir giriş yaparsa uyarı mesajı gösteriyoruz
+            print("Geçersiz giriş, lütfen bir sayı girin.")
+            continue  # Döngü başa döner
+
+        # Yedek Parça seçeneği
+        if secenek == 1:
+            print(f"Yedek Parça seçtiniz. Mevcut stok: {stok[0]}")
+            print("1. Stok Ekleme")
+            print("2. Stok Çıkarma")
+            
+            # Kullanıcının ekleme veya çıkarma işlemini seçmesini istiyoruz
+            islem = int(input("İşlemi seçin (1 veya 2): "))
+            miktar = int(input("Miktar girin: "))
+
+            # Stok Ekleme işlemi
+            if islem == 1:
+                stok[0] += miktar  # Girilen miktar stoklara eklenir
+                print(f"Yedek Parça stoğuna {miktar} eklendi. Yeni stok: {stok[0]}")
+            # Stok Çıkarma işlemi
+            elif islem == 2:
+                # Eğer çıkarılacak miktar mevcut stoktan büyükse uyarı veriyoruz
+                if miktar > stok[0]:
+                    print("Hata: Çıkarmak istediğiniz miktar mevcut stoktan büyük olamaz!")
+                else:
+                    stok[0] -= miktar  # Girilen miktar stoklardan çıkarılır
+                    print(f"Yedek Parça stoğundan {miktar} çıkarıldı. Yeni stok: {stok[0]}")
+            else:
+                # Geçersiz işlem seçimi yapıldıysa uyarı veriyoruz
+                print("Geçersiz işlem seçimi.")
+
+        # Makine Parçası seçeneği
+        elif secenek == 2:
+            print(f"Makine Parçası seçtiniz. Mevcut stok: {stok[1]}")
+            print("1. Stok Ekleme")
+            print("2. Stok Çıkarma")
+            
+            # Kullanıcının ekleme veya çıkarma işlemini seçmesini istiyoruz
+            islem = int(input("İşlemi seçin (1 veya 2): "))
+            miktar = int(input("Miktar girin: "))
+
+            # Stok Ekleme işlemi
+            if islem == 1:
+                stok[1] += miktar  # Girilen miktar stoklara eklenir
+                print(f"Makine Parçası stoğuna {miktar} eklendi. Yeni stok: {stok[1]}")
+            # Stok Çıkarma işlemi
+            elif islem == 2:
+                # Eğer çıkarılacak miktar mevcut stoktan büyükse uyarı veriyoruz
+                if miktar > stok[1]:
+                    print("Hata: Çıkarmak istediğiniz miktar mevcut stoktan büyük olamaz!")
+                else:
+                    stok[1] -= miktar  # Girilen miktar stoklardan çıkarılır
+                    print(f"Makine Parçası stoğundan {miktar} çıkarıldı. Yeni stok: {stok[1]}")
+            else:
+                # Geçersiz işlem seçimi yapıldıysa uyarı veriyoruz
+                print("Geçersiz işlem seçimi.")
+
+        # Stokları Görüntüleme seçeneği
+        elif secenek == 3:
+            print("Stoklar:")
+            # Stokları sırayla ekrana yazdırıyoruz
+            for i, miktar in enumerate(stok):
+                # Stok türünü belirliyoruz
+                parca_tipi = "Yedek Parça" if i == 0 else "Makine Parçası"
+                print(f"{parca_tipi} Stoku: {miktar}")
+
+        # Çıkış seçeneği
+        elif secenek == 4:
+            print("Çıkış yapılıyor...")
+            devam_et = False  # Döngüyü sonlandırmak için bool değişkenini False yapıyoruz
+        else:
+            # Geçersiz seçim yapılırsa uyarı veriyoruz
+            print("Geçersiz seçim, lütfen 1 ile 4 arasında bir sayı girin.")
+
+
+def giris():
+    # Doğru kullanıcı adı ve şifreyi belirliyoruz
+    kullanici_adi_dogru = "ambar"
+    sifre_dogru = "12345"
+
+    # Kullanıcıdan giriş bilgilerini alıyoruz
+    kullanici_adi = input("Kullanıcı adınızı girin: ")
+    sifre = input("Şifrenizi girin: ")
+
+    # Kullanıcı adı ve şifreyi kontrol ediyoruz
+    if kullanici_adi == kullanici_adi_dogru and sifre == sifre_dogru:
+        print("Giriş başarılı!")
+        # Örnek stok değerleri: Yedek Parça - 100, Makine Parçası - 200
+        stok = [100, 200]
+        # Giriş başarılıysa ana sayfaya yönlendiriyoruz
+        ana_sayfa(stok)
+    else:
+        # Giriş başarısız olursa uyarı veriyoruz
+        print("Giriş başarısız. Kullanıcı adı veya şifre yanlış.")
+
+
+# Giriş fonksiyonunu çağırarak işlemi başlatıyoruz
+giris()

@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Dosya Yükleme</h2>
+
+<form asp-controller="Home" asp-action="UploadFile" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file">Yüklenecek Dosya (Sadece .txt kabul edilir):</label>
+        <input type="file" id="file" name="file" />
+    </div>
+    <div>
+        <label for="targetPath">Hedef Klasör Yolu:</label>
+        <input type="text" id="targetPath" name="targetPath" placeholder="C:\dosya_yolu" />
+    </div>
+    <button type="submit">Gönder</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}
